@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import Navbar from "./modules/shared/components/Navbar";
+import { defineAsyncComponent } from "vue";
 export default {
   name: "App",
   components: {
-    Navbar,
+    Navbar: defineAsyncComponent(() => import(/*webpackChunkName: "Navbar"*/ "@/modules/shared/components/Navbar")),
   },
 };
 </script>

@@ -10,8 +10,15 @@ const routes = [
     component: () => import(/*webpackChunkName: "about"*/ "../modules/pokemon/pages/AboutPage"),
   },
   {
-    path: "/id",
+    path: "/:id",
     component: () => import(/*webpackChunkName: "PokemonPage"*/ "../modules/pokemon/pages/PokemonPage"),
+    props: (route) => {
+      console.log(route);
+      const { id } = route.params;
+      return {
+        id,
+      };
+    },
   },
   {
     path: "/:pathMatch(.*)*",
