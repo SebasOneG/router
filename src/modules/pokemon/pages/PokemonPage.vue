@@ -1,10 +1,11 @@
 <template>
   <h1>Pokemon Page: {{ id }}</h1>
+  <div v-if="pokemon">
+    <img :src="pokemon.sprites.front_default" :alt="pokemon.name">
+  </div>
 </template>
 
 <script>
-import { TrackOpTypes } from "vue";
-
 export default {
   props: {
     id: {
@@ -26,12 +27,16 @@ export default {
       try {
         const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${this.id}`).then((res) => res.json());
         this.pokemon = pokemon;
-        console.log(pokemon);
       } catch (error) {
         this.$router.push("/");
         console.log(error);
       }
     },
+  },
+  watch: {
+    id() {
+      this.getPokemon()
+    }
   },
 };
 </script>
